@@ -1,3 +1,4 @@
 # Kuafor
 Sakarya Üniversitesi 3.Sınıf Web Programlama dönem projesi.
-Mustafa Erdoğan - B221210308
+/n  Mustafa Erdoğan - B221210308
+/n  Ali Aydın - B221210373

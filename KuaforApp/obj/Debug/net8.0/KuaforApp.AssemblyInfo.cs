@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ad1b3302fd5b2fab2e370c3575a3bbde1236231")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f69454e9a760df83d2c1c2fedc1f6f84bde0bf7e")]
 [assembly: System.Reflection.AssemblyProductAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

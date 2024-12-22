@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f69454e9a760df83d2c1c2fedc1f6f84bde0bf7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a210bfbdbc09228e456d954d4e3f738870d2300a")]
 [assembly: System.Reflection.AssemblyProductAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KuaforApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

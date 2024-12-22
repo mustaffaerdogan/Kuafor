@@ -40,13 +40,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\KuaforApp.gqxci0sdqa.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1127"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI=\u0022"},{"Name":"Last-Modified","Value":"Sat, 21 Dec 2024 20:28:10 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1127"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI=\u0022"},{"Name":"Last-Modified","Value":"Sun, 22 Dec 2024 20:31:49 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/KuaforApp/KuaforApp.gqxci0sdqa.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\KuaforApp.gqxci0sdqa.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"gqxci0sdqa"},{"Name":"integrity","Value":"sha256-yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI="},{"Name":"label","Value":"_content/KuaforApp/KuaforApp.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1127"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI=\u0022"},{"Name":"Last-Modified","Value":"Sat, 21 Dec 2024 20:28:10 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1127"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yIeXmjaKBDVOYktgpWCin72MEaL82gBJWz6BzMxTmbI=\u0022"},{"Name":"Last-Modified","Value":"Sun, 22 Dec 2024 20:31:49 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/KuaforApp/lib/bootstrap/dist/css/bootstrap-grid.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</AssetFile>

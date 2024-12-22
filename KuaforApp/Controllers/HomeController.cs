@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using KuaforApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KuaforApp.Controllers
 {
@@ -13,12 +14,16 @@ namespace KuaforApp.Controllers
             _logger = logger;
         }
 
+        // Allow anonymous access to the landing page
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        // Require authentication for the dashboard
+        [Authorize]
+        public IActionResult Dashboard()
         {
             return View();
         }

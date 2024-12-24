@@ -1,0 +1,82 @@
+@model KuaforApp.Models.Service
+
+@{
+    ViewData["Title"] = "Hizmet Düzenle";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="ServiceID" />
+                        <input type="hidden" asp-for="CreatedAt" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SalonID" class="form-label"></label>
+                            <select asp-for="SalonID" class="form-select" asp-items="ViewBag.SalonID">
+                                <option value="">-- Salon Seçiniz --</option>
+                            </select>
+                            <span asp-validation-for="SalonID" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ServiceName" class="form-label"></label>
+                            <input asp-for="ServiceName" class="form-control" placeholder="Hizmet adını giriniz" />
+                            <span asp-validation-for="ServiceName" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Duration" class="form-label"></label>
+                                    <input asp-for="Duration" class="form-control" placeholder="Süreyi dakika olarak giriniz" />
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Price" class="form-label"></label>
+                                    <div class="input-group">
+                                        <input asp-for="Price" class="form-control" placeholder="0.00" />
+                                        <span class="input-group-text">TL</span>
+                                    </div>
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Kaydet
+                            </button>
+                            <a asp-action="Index" asp-route-salonId="@Model.SalonID" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Listeye Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Format price input to show two decimal places
+        $(document).ready(function () {
+            $("#Price").on("change", function () {
+                var value = parseFloat($(this).val());
+                if (!isNaN(value)) {
+                    $(this).val(value.toFixed(2));
+                }
+            });
+        });
+    </script>
+} 

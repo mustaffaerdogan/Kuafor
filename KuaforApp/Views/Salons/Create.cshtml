@@ -1,0 +1,172 @@
+@model KuaforApp.Models.Salon
+
+@{
+    ViewData["Title"] = "Yeni Salon Ekle";
+    var workingDaysList = Model?.GetWorkingDaysList() ?? new List<string>();
+}
+
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form asp-action="Create" id="createSalonForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SalonName" class="form-label"></label>
+                            <input asp-for="SalonName" class="form-control" placeholder="Örnek: Güzellik Salonu" />
+                            <span asp-validation-for="SalonName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" placeholder="Örnek: Atatürk Caddesi No:123, İstanbul" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="OpeningHours" class="form-label"></label>
+                                    <input asp-for="OpeningHours" type="time" class="form-control" required />
+                                    <span asp-validation-for="OpeningHours" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ClosingHours" class="form-label"></label>
+                                    <input asp-for="ClosingHours" type="time" class="form-control" required />
+                                    <span asp-validation-for="ClosingHours" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="WorkingDays" class="form-label">Çalışma Günleri</label>
+                            <select id="workingDaysSelect" class="form-select select2" multiple data-placeholder="Çalışma günlerini seçin">
+                                @foreach (var day in ViewBag.WorkingDays ?? new List<string>())
+                                {
+                                    <option value="@day" selected="@workingDaysList.Contains(day)">@day</option>
+                                }
+                            </select>
+                            <input type="hidden" asp-for="WorkingDays" id="workingDaysInput" />
+                            <span asp-validation-for="WorkingDays" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary" id="submitButton">
+                                <i class="bi bi-save"></i> Kaydet
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Listeye Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // Wait for document to be ready
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Select2
+            $('.select2').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                language: {
+                    noResults: function () {
+                        return "Sonuç bulunamadı";
+                    }
+                }
+            });
+
+            // Auto-hide success message after 5 seconds
+            const successAlert = document.querySelector('.alert-success');
+            if (successAlert) {
+                setTimeout(function () {
+                    successAlert.classList.remove('show');
+                    setTimeout(() => successAlert.remove(), 150);
+                }, 5000);
+            }
+
+            // Form submit handler
+            const form = document.getElementById('createSalonForm');
+            const submitButton = document.getElementById('submitButton');
+            const workingDaysSelect = document.getElementById('workingDaysSelect');
+            const workingDaysInput = document.getElementById('workingDaysInput');
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    // Update working days input before submission
+                    const selectedDays = Array.from(workingDaysSelect.selectedOptions).map(option => option.value);
+                    if (selectedDays.length === 0) {
+                        e.preventDefault();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: 'Lütfen en az bir çalışma günü seçin.',
+                            confirmButtonText: 'Tamam'
+                        });
+                        return;
+                    }
+                    workingDaysInput.value = selectedDays.join(',');
+
+                    // Validate time inputs
+                    const openingHours = document.querySelector('input[name="OpeningHours"]');
+                    const closingHours = document.querySelector('input[name="ClosingHours"]');
+                    
+                    if (openingHours && closingHours && 
+                        openingHours.value && closingHours.value &&
+                        openingHours.value >= closingHours.value) {
+                        e.preventDefault();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: 'Kapanış saati açılış saatinden sonra olmalıdır.',
+                            confirmButtonText: 'Tamam'
+                        });
+                        return;
+                    }
+
+                    // Disable submit button to prevent double submission
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                    }
+                });
+            }
+
+            // Reset form after successful submission
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                if (form) {
+                    form.reset();
+                    $('.select2').val(null).trigger('change');
+                }
+                </text>
+            }
+        });
+    </script>
+} 

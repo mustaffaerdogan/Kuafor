@@ -1,0 +1,51 @@
+@model KuaforApp.Models.Service
+
+@{
+    ViewData["Title"] = "Hizmet Sil";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="text-center mb-0">Hizmet Silme Onayı</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>@Model.ServiceName</strong> hizmetini silmek istediğinizden emin misiniz?
+                        Bu işlem geri alınamaz.
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ServiceName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ServiceName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Duration)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Duration) dk</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N2") TL</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Salon.SalonName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Salon.SalonName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
+                        <dd class="col-sm-8">@Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd>
+                    </dl>
+
+                    <form asp-action="Delete" class="text-center mt-4">
+                        <input type="hidden" asp-for="ServiceID" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Hizmeti Sil
+                        </button>
+                        <a asp-action="Index" asp-route-salonId="@Model.SalonID" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Vazgeç
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

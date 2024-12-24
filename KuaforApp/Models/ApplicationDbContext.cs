@@ -10,11 +10,19 @@ namespace KuaforApp.Models
         {
         }
 
+        public DbSet<Salon> Salons { get; set; }
+        public DbSet<Service> Services { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             
-            // Add any additional model configurations here
+            // Configure relationships
+            builder.Entity<Service>()
+                .HasOne(s => s.Salon)
+                .WithMany(s => s.Services)
+                .HasForeignKey(s => s.SalonID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

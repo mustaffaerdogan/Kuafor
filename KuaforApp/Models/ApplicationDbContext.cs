@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KuaforApp.Models
 {
@@ -23,6 +24,22 @@ namespace KuaforApp.Models
                 .WithMany(s => s.Services)
                 .HasForeignKey(s => s.SalonID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure TimeSpan properties with value converter
+            var timeSpanConverter = new ValueConverter<TimeSpan, TimeSpan>(
+                timeSpan => timeSpan,
+                timeSpan => TimeSpan.FromTicks(timeSpan.Ticks)
+            );
+
+            builder.Entity<Salon>()
+                .Property(s => s.OpeningHours)
+                .HasColumnType("time")
+                .HasConversion(timeSpanConverter);
+
+            builder.Entity<Salon>()
+                .Property(s => s.ClosingHours)
+                .HasColumnType("time")
+                .HasConversion(timeSpanConverter);
         }
     }
 }

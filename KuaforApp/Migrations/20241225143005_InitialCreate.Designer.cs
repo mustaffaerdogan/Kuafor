@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KuaforApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241224174114_InitialCreateDescription")]
-    partial class InitialCreateDescription
+    [Migration("20241225143005_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace KuaforApp.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SalonID"));
 
                     b.Property<TimeSpan>("ClosingHours")
-                        .HasColumnType("interval");
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -123,7 +123,7 @@ namespace KuaforApp.Migrations
                         .HasColumnType("character varying(255)");
 
                     b.Property<TimeSpan>("OpeningHours")
-                        .HasColumnType("interval");
+                        .HasColumnType("time");
 
                     b.Property<string>("SalonName")
                         .IsRequired()

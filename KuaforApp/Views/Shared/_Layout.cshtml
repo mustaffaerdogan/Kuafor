@@ -30,6 +30,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Services" asp-action="Index">Hizmetler</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Employees" asp-action="Index">
+                                    <i class="bi bi-people"></i> Çalışanlar
+                                </a>
+                            </li>
+                        }
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
@@ -51,6 +59,11 @@
                                     <li>
                                         <a class="dropdown-item" asp-controller="Services" asp-action="Create">
                                             <i class="bi bi-plus-circle"></i> Yeni Hizmet Ekle
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Employees" asp-action="Create">
+                                            <i class="bi bi-person-plus"></i> Yeni Çalışan Ekle
                                         </a>
                                     </li>
                                 </ul>

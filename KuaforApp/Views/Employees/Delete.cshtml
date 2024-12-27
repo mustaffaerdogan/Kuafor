@@ -1,0 +1,52 @@
+@model KuaforApp.Models.Employee
+
+@{
+    ViewData["Title"] = "Çalışan Sil";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Dikkat!</h4>
+        <p>Bu çalışanı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Çalışan Bilgileri</h5>
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FullName)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.FullName)</dd>
+
+                <dt class="col-sm-3">Salon</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Salon.SalonName)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.WorkingDays)</dt>
+                <dd class="col-sm-9">@Model.GetWorkingDaysList().Select(d => d.Trim()).Aggregate((a, b) => $"{a}, {b}")</dd>
+
+                <dt class="col-sm-3">Çalışma Saatleri</dt>
+                <dd class="col-sm-9">@Model.OpeningHours.ToString(@"hh\:mm") - @Model.ClosingHours.ToString(@"hh\:mm")</dd>
+
+                <dt class="col-sm-3">Hizmetler</dt>
+                <dd class="col-sm-9">
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var service in Model.EmployeeServices.Select(es => es.Service))
+                        {
+                            <li>@service.ServiceName - @service.Price TL</li>
+                        }
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="d-inline">
+        <input type="hidden" asp-for="EmployeeID" />
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Bu çalışanı silmek istediğinizden emin misiniz?')">
+            <i class="fas fa-trash"></i> Sil
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </form>
+</div> 

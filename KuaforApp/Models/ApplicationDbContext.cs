@@ -13,6 +13,8 @@ namespace KuaforApp.Models
 
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeService> EmployeeServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,6 +26,24 @@ namespace KuaforApp.Models
                 .WithMany(s => s.Services)
                 .HasForeignKey(s => s.SalonID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Employee>()
+                .HasOne(e => e.Salon)
+                .WithMany()
+                .HasForeignKey(e => e.SalonID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<EmployeeService>()
+                .HasOne(es => es.Employee)
+                .WithMany(e => e.EmployeeServices)
+                .HasForeignKey(es => es.EmployeeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<EmployeeService>()
+                .HasOne(es => es.Service)
+                .WithMany()
+                .HasForeignKey(es => es.ServiceID)
+                .OnDelete(DeleteBehavior.NoAction); // Using NoAction to avoid circular cascade delete
 
             // Configure TimeSpan properties with value converter
             var timeSpanConverter = new ValueConverter<TimeSpan, TimeSpan>(
@@ -38,6 +58,16 @@ namespace KuaforApp.Models
 
             builder.Entity<Salon>()
                 .Property(s => s.ClosingHours)
+                .HasColumnType("time")
+                .HasConversion(timeSpanConverter);
+
+            builder.Entity<Employee>()
+                .Property(e => e.OpeningHours)
+                .HasColumnType("time")
+                .HasConversion(timeSpanConverter);
+
+            builder.Entity<Employee>()
+                .Property(e => e.ClosingHours)
                 .HasColumnType("time")
                 .HasConversion(timeSpanConverter);
         }

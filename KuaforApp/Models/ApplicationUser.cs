@@ -9,5 +9,6 @@ namespace KuaforApp.Models
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsActive { get; set; } = true;
+        public UserRole Role { get; set; } = UserRole.User; // Default role is User
     }
 } 

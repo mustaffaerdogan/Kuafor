@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KuaforApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KuaforApp.Controllers
 {
@@ -32,6 +33,7 @@ namespace KuaforApp.Controllers
         /// Hizmetler önce salon adına, sonra hizmet adına göre sıralanır.
         /// Her hizmet için bağlı olduğu salon bilgisi de yüklenir.
         /// </summary>
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Index()
         {
             var services = await _context.Services
@@ -47,6 +49,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Hizmet ID</param>
         /// <returns>Hizmet bulunamazsa NotFound, bulunursa Details view'ı döner</returns>
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -70,6 +73,7 @@ namespace KuaforApp.Controllers
         /// Yeni hizmet ekleme formunu gösterir.
         /// Salon seçimi için gerekli verileri ViewBag ile view'a aktarır.
         /// </summary>
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.SalonID = new SelectList(_context.Salons.OrderBy(s => s.SalonName), "SalonID", "SalonName");
@@ -83,6 +87,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa formu tekrar gösterir</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("ServiceName,Duration,Price,Description,SalonID")] Service service)
         {
             if (ModelState.IsValid)
@@ -110,6 +115,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Düzenlenecek hizmet ID</param>
         /// <returns>Hizmet bulunamazsa NotFound, bulunursa Edit view'ı döner</returns>
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -135,6 +141,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa formu tekrar gösterir</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ServiceID,ServiceName,Duration,Price,Description,SalonID")] Service service)
         {
             if (id != service.ServiceID)
@@ -189,6 +196,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Silinecek hizmet ID</param>
         /// <returns>Hizmet bulunamazsa NotFound, bulunursa Delete view'ı döner</returns>
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -215,6 +223,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa Index'e hata mesajıyla yönlendirir</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var service = await _context.Services.FindAsync(id);

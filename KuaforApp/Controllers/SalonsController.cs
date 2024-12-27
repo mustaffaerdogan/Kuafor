@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KuaforApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KuaforApp.Controllers
 {
@@ -31,6 +32,7 @@ namespace KuaforApp.Controllers
         /// Salonlar oluşturulma tarihine göre azalan sırada listelenir.
         /// Her salon için ilişkili hizmetler de yüklenir.
         /// </summary>
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Index()
         {
             var salons = await _context.Salons
@@ -45,6 +47,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Salon ID</param>
         /// <returns>Salon bulunamazsa NotFound, bulunursa Details view'ı döner</returns>
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -68,6 +71,7 @@ namespace KuaforApp.Controllers
         /// Yeni salon ekleme formunu gösterir.
         /// Çalışma günleri seçimi için gerekli verileri ViewBag ile view'a aktarır.
         /// </summary>
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.WorkingDays = _workingDays;
@@ -81,6 +85,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa formu tekrar gösterir</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("SalonName,Location,OpeningHours,ClosingHours,WorkingDays")] Salon salon)
         {
             if (ModelState.IsValid)
@@ -124,6 +129,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Düzenlenecek salon ID</param>
         /// <returns>Salon bulunamazsa NotFound, bulunursa Edit view'ı döner</returns>
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -149,6 +155,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa formu tekrar gösterir</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("SalonID,SalonName,Location,OpeningHours,ClosingHours,WorkingDays")] Salon salon)
         {
             if (id != salon.SalonID)
@@ -219,6 +226,7 @@ namespace KuaforApp.Controllers
         /// </summary>
         /// <param name="id">Silinecek salon ID</param>
         /// <returns>Salon bulunamazsa NotFound, bulunursa Delete view'ı döner</returns>
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -246,6 +254,7 @@ namespace KuaforApp.Controllers
         /// <returns>Başarılı ise Index'e yönlendirir, hata varsa Delete view'ı gösterir</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var salon = await _context.Salons

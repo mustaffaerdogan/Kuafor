@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KuaforApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241227125617_AdminFeatures")]
-    partial class AdminFeatures
+    [Migration("20241227185018_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

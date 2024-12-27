@@ -105,7 +105,7 @@ using (var scope = app.Services.CreateScope())
                 FirstName = adminData.FirstName,
                 LastName = adminData.LastName,
                 Role = UserRole.Admin,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 EmailConfirmed = true // Admin e-postalarını otomatik onayla
             };
 

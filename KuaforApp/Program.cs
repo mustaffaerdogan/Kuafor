@@ -45,19 +45,82 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-// Initialize roles
+// Rolleri ve admin kullanıcılarını başlat
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    // Create roles if they don't exist
+    // Rolleri oluştur (eğer yoksa)
     string[] roleNames = { "Admin", "User" };
     foreach (var roleName in roleNames)
     {
         if (!await roleManager.RoleExistsAsync(roleName))
         {
             await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+
+    // Admin kullanıcı bilgileri
+    var adminUsers = new List<(string FirstName, string LastName, string Email, string Password)>
+    {
+        ("Ali", "Aydın", "B221210373@sakarya.edu.tr", "Test.1234"),
+        ("Mustafa", "Erdoğan", "B221210308@sakarya.edu.tr", "Test.1234")
+    };
+
+    // Her bir admin kullanıcısı için kontrol ve güncelleme işlemi
+    foreach (var adminData in adminUsers)
+    {
+        // Kullanıcıyı e-posta adresine göre kontrol et
+        var existingUser = await userManager.FindByEmailAsync(adminData.Email);
+
+        if (existingUser != null)
+        {
+            // Kullanıcı zaten varsa, rolünü kontrol et
+            var userRoles = await userManager.GetRolesAsync(existingUser);
+            
+            if (!userRoles.Contains("Admin"))
+            {
+                // Mevcut rollerini kaldır
+                await userManager.RemoveFromRolesAsync(existingUser, userRoles);
+                
+                // Admin rolünü ekle
+                await userManager.AddToRoleAsync(existingUser, "Admin");
+                
+                // Role property'sini güncelle
+                existingUser.Role = UserRole.Admin;
+                await context.SaveChangesAsync();
+                
+                Console.WriteLine($"Kullanıcı {existingUser.Email} admin rolüne yükseltildi.");
+            }
+        }
+        else
+        {
+            // Yeni admin kullanıcısı oluştur
+            var adminUser = new ApplicationUser
+            {
+                UserName = adminData.Email,
+                Email = adminData.Email,
+                FirstName = adminData.FirstName,
+                LastName = adminData.LastName,
+                Role = UserRole.Admin,
+                CreatedAt = DateTime.Now,
+                EmailConfirmed = true // Admin e-postalarını otomatik onayla
+            };
+
+            var result = await userManager.CreateAsync(adminUser, adminData.Password);
+            if (result.Succeeded)
+            {
+                // Admin rolünü ata
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+                Console.WriteLine($"Yeni admin kullanıcısı oluşturuldu: {adminUser.Email}");
+            }
+            else
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                Console.WriteLine($"Kullanıcı oluşturma hatası {adminUser.Email}: {errors}");
+            }
         }
     }
 }

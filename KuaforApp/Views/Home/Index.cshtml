@@ -1,29 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
 <div class="container">
     <!-- Hero Section -->
     <div class="row align-items-center py-5">
         <div class="col-md-6">
-            <h1 class="display-4 fw-bold">Beauty Salon Management System</h1>
-            <p class="lead">Streamline your beauty salon operations with our comprehensive management solution.</p>
+            <h1 class="display-4 fw-bold">Güzellik Salonu Yönetim Sistemi</h1>
+            <p class="lead">Güzellik salonu operasyonlarınızı kapsamlı yönetim çözümümüzle kolaylaştırın.</p>
             @if (!User.Identity.IsAuthenticated)
             {
                 <div class="mt-4">
-                    <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg me-3">Get Started</a>
-                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary btn-lg">Sign In</a>
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg me-3">Hemen Başlayın</a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary btn-lg">Giriş Yap</a>
                 </div>
             }
         </div>
         <div class="col-md-6">
-            <img src="~/images/salon-hero.jpg" alt="Beauty Salon" class="img-fluid rounded shadow" />
+            <img src="~/images/salon-hero.jpg" alt="Güzellik Salonu" class="img-fluid rounded shadow" />
         </div>
     </div>
 
     <!-- Features Section -->
     <div class="row py-5">
-        <h2 class="text-center mb-4">Key Features</h2>
+        <h2 class="text-center mb-4">Ana Özellikler</h2>
         
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
@@ -31,8 +31,8 @@
                     <div class="text-center mb-3">
                         <i class="bi bi-calendar-check text-primary" style="font-size: 2rem;"></i>
                     </div>
-                    <h5 class="card-title text-center">Appointment Management</h5>
-                    <p class="card-text">Efficiently manage appointments, reduce no-shows, and optimize your schedule.</p>
+                    <h5 class="card-title text-center">Randevu Yönetimi</h5>
+                    <p class="card-text">Randevularınızı verimli bir şekilde yönetin, müşteri gelmeme durumlarını azaltın ve takviminizi optimize edin.</p>
                 </div>
             </div>
         </div>
@@ -43,8 +43,8 @@
                     <div class="text-center mb-3">
                         <i class="bi bi-people text-primary" style="font-size: 2rem;"></i>
                     </div>
-                    <h5 class="card-title text-center">Customer Management</h5>
-                    <p class="card-text">Keep track of customer preferences, history, and maintain strong relationships.</p>
+                    <h5 class="card-title text-center">Müşteri Yönetimi</h5>
+                    <p class="card-text">Müşteri tercihlerini, geçmişini takip edin ve güçlü ilişkiler kurun.</p>
                 </div>
             </div>
         </div>
@@ -55,8 +55,8 @@
                     <div class="text-center mb-3">
                         <i class="bi bi-graph-up text-primary" style="font-size: 2rem;"></i>
                     </div>
-                    <h5 class="card-title text-center">Business Analytics</h5>
-                    <p class="card-text">Get insights into your business performance with detailed reports and analytics.</p>
+                    <h5 class="card-title text-center">İş Analitiği</h5>
+                    <p class="card-text">Detaylı raporlar ve analizlerle iş performansınızı görün.</p>
                 </div>
             </div>
         </div>
@@ -65,17 +65,17 @@
     <!-- About Section -->
     <div class="row py-5 bg-light rounded">
         <div class="col-md-8 offset-md-2 text-center">
-            <h2 class="mb-4">Why Choose Our System?</h2>
-            <p class="lead">Our beauty salon management system is designed to help salon owners and staff manage their business more efficiently. With features like appointment scheduling, customer management, and business analytics, you can focus on what matters most - providing excellent service to your clients.</p>
+            <h2 class="mb-4">Neden Sistemimizi Tercih Etmelisiniz?</h2>
+            <p class="lead">Güzellik salonu yönetim sistemimiz, salon sahiplerine ve çalışanlarına işlerini etkili bir şekilde yönetmeleri için tasarlanmıştır. Randevu planlama, müşteri yönetimi ve iş analitiği gibi özelliklerle, en önemli şeye odaklanabilirsiniz - müşterilerinize mükemmel hizmet sunmak.</p>
             
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <h5><i class="bi bi-check-circle-fill text-success"></i> Easy to Use</h5>
-                    <p>Intuitive interface designed for salon professionals</p>
+                    <h5><i class="bi bi-check-circle-fill text-success"></i> Kullanımı Kolay</h5>
+                    <p>Salon profesyonelleri için tasarlanmış sezgisel arayüz</p>
                 </div>
                 <div class="col-md-6">
-                    <h5><i class="bi bi-check-circle-fill text-success"></i> Secure</h5>
-                    <p>Your data is protected with industry-standard security</p>
+                    <h5><i class="bi bi-check-circle-fill text-success"></i> Güvenli</h5>
+                    <p>Verileriniz endüstri standardı güvenlikle korunur</p>
                 </div>
             </div>
         </div>
@@ -86,9 +86,9 @@
     {
         <div class="row py-5">
             <div class="col-md-8 offset-md-2 text-center">
-                <h2 class="mb-4">Ready to Get Started?</h2>
-                <p class="lead mb-4">Join thousands of satisfied salon owners who have transformed their business with our system.</p>
-                <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg">Create Your Account</a>
+                <h2 class="mb-4">Başlamaya Hazır mısınız?</h2>
+                <p class="lead mb-4">Sistemimizle işlerini dönüştüren binlerce memnun salon sahibine katılın.</p>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg">Hesabınızı Oluşturun</a>
             </div>
         </div>
     }

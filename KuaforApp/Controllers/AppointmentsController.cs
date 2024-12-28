@@ -18,8 +18,8 @@ namespace KuaforApp.Controllers
             _context = context;
         }
 
-        // GET: Appointments
-        public async Task<IActionResult> Index()
+        // GET: Appointments/MyAppointments
+        public async Task<IActionResult> MyAppointments()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var appointments = await _context.Appointments
@@ -28,20 +28,126 @@ namespace KuaforApp.Controllers
                 .Include(a => a.Employee)
                 .Where(a => a.UserID == userId)
                 .OrderByDescending(a => a.AppointmentDate)
-                .Select(a => new AppointmentListViewModel
-                {
-                    AppointmentID = a.AppointmentID,
-                    SalonName = a.Salon.SalonName,
-                    ServiceName = a.Service.ServiceName,
-                    EmployeeName = a.Employee.FullName,
-                    AppointmentDate = a.AppointmentDate,
-                    TimeSlot = a.TimeSlot,
-                    Status = a.Status,
-                    CreatedAt = a.CreatedAt
-                })
+                .ThenBy(a => a.TimeSlot)
                 .ToListAsync();
 
             return View(appointments);
+        }
+
+        // GET: Appointments (Admin only)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            var appointments = await _context.Appointments
+                .Include(a => a.User)
+                .Include(a => a.Salon)
+                .Include(a => a.Service)
+                .Include(a => a.Employee)
+                .OrderByDescending(a => a.AppointmentDate)
+                .ThenBy(a => a.TimeSlot)
+                .ToListAsync();
+
+            return View(appointments);
+        }
+
+        // GET: Appointments/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var appointment = await _context.Appointments
+                .Include(a => a.User)
+                .Include(a => a.Salon)
+                .Include(a => a.Service)
+                .Include(a => a.Employee)
+                .FirstOrDefaultAsync(m => m.AppointmentID == id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            // Kullanıcı sadece kendi randevusunu görebilir, admin hepsini görebilir
+            if (!User.IsInRole("Admin") && appointment.UserID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return Forbid();
+            }
+
+            return View(appointment);
+        }
+
+        // POST: Appointments/Cancel/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            // Kullanıcı sadece kendi randevusunu iptal edebilir, admin hepsini iptal edebilir
+            if (!User.IsInRole("Admin") && appointment.UserID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return Forbid();
+            }
+
+            // Geçmiş randevular iptal edilemez
+            if (appointment.AppointmentDate < DateTime.UtcNow.Date || 
+                (appointment.AppointmentDate == DateTime.UtcNow.Date && 
+                TimeSpan.Parse(appointment.TimeSlot) < DateTime.UtcNow.TimeOfDay))
+            {
+                TempData["ErrorMessage"] = "Geçmiş randevular iptal edilemez.";
+                return RedirectToAction(nameof(MyAppointments));
+            }
+
+            appointment.Status = AppointmentStatus.Rejected;
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Randevunuz başarıyla iptal edildi.";
+            return RedirectToAction(nameof(MyAppointments));
+        }
+
+        // POST: Appointments/Approve/5 (Admin only)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            appointment.Status = AppointmentStatus.Approved;
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Randevu başarıyla onaylandı.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Appointments/Reject/5 (Admin only)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            appointment.Status = AppointmentStatus.Rejected;
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Randevu başarıyla reddedildi.";
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Appointments/Create

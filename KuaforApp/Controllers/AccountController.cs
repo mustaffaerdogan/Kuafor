@@ -42,6 +42,9 @@ namespace KuaforApp.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Add user to the User role
+                    await _userManager.AddToRoleAsync(user, "User");
+                    
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

@@ -15,6 +15,7 @@ namespace KuaforApp.Controllers
     /// Bu controller hizmet ekleme, düzenleme, silme ve listeleme işlemlerini yönetir.
     /// Her hizmet bir salona bağlıdır.
     /// </summary>
+    [Authorize]
     public class ServicesController : Controller
     {
         private readonly ApplicationDbContext _context;

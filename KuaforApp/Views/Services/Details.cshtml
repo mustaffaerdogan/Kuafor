@@ -1,0 +1,83 @@
+@model KuaforApp.Models.Service
+
+@{
+    ViewData["Title"] = "Hizmet Detayları";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ServiceName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ServiceName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Salon)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Salon.SalonName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Duration)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Duration) dakika</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N2") ₺</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Description))
+                        {
+                            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Description)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Description)</dd>
+                        }
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
+                        <dd class="col-sm-8">@Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd>
+                    </dl>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Listeye Dön
+                        </a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.ServiceID" class="btn btn-primary">
+                                <i class="bi bi-pencil me-1"></i>Düzenle
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model.ServiceID" class="btn btn-danger">
+                                <i class="bi bi-trash me-1"></i>Sil
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Silme işlemi için onay kutusu
+        document.querySelectorAll('a[asp-action="Delete"]').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+                
+                Swal.fire({
+                    title: 'Emin misiniz?',
+                    text: "Bu hizmet kalıcı olarak silinecektir!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Evet, sil',
+                    cancelButtonText: 'İptal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    </script>
+} 

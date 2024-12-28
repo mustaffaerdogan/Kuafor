@@ -35,6 +35,10 @@ namespace KuaforApp.Models
         [StringLength(255, ErrorMessage = "Çalışma günleri 255 karakterden uzun olamaz.")]
         public string WorkingDays { get; set; } = string.Empty;
 
+        [Display(Name = "Salon Resmi")]
+        [StringLength(1000)]
+        public string? ImageUrl { get; set; }
+
         [Display(Name = "Oluşturulma Tarihi")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

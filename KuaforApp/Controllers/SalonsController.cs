@@ -13,10 +13,10 @@ namespace KuaforApp.Controllers
     /// Kuaför/Berber salonlarının yönetimini sağlayan controller sınıfı.
     /// Bu controller salon ekleme, düzenleme, silme ve listeleme işlemlerini yönetir.
     /// </summary>
+    [Authorize]
     public class SalonsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly string[] _workingDays = new[] { "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar" };
 
         /// <summary>
         /// SalonsController constructor'ı.
@@ -37,7 +37,7 @@ namespace KuaforApp.Controllers
         {
             var salons = await _context.Salons
                 .Include(s => s.Services)
-                .OrderByDescending(s => s.CreatedAt)
+                .OrderBy(s => s.SalonName)
                 .ToListAsync();
             return View(salons);
         }
@@ -74,7 +74,6 @@ namespace KuaforApp.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewBag.WorkingDays = _workingDays;
             return View();
         }
 
@@ -86,29 +85,12 @@ namespace KuaforApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("SalonName,Location,OpeningHours,ClosingHours,WorkingDays")] Salon salon)
+        public async Task<IActionResult> Create(Salon salon)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Validate working days
-                    if (string.IsNullOrEmpty(salon.WorkingDays))
-                    {
-                        ModelState.AddModelError("WorkingDays", "En az bir çalışma günü seçmelisiniz.");
-                        ViewBag.WorkingDays = _workingDays;
-                        return View(salon);
-                    }
-
-                    // Validate opening and closing hours
-                    if (salon.OpeningHours >= salon.ClosingHours)
-                    {
-                        ModelState.AddModelError("ClosingHours", "Kapanış saati açılış saatinden sonra olmalıdır.");
-                        ViewBag.WorkingDays = _workingDays;
-                        return View(salon);
-                    }
-
-                    salon.CreatedAt = DateTime.UtcNow;
                     _context.Add(salon);
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Salon başarıyla oluşturuldu.";
@@ -116,11 +98,9 @@ namespace KuaforApp.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Salon kaydedilirken bir hata oluştu: " + ex.Message);
+                    ModelState.AddModelError("", "Salon oluşturulurken bir hata oluştu: " + ex.Message);
                 }
             }
-
-            ViewBag.WorkingDays = _workingDays;
             return View(salon);
         }
 
@@ -142,8 +122,6 @@ namespace KuaforApp.Controllers
             {
                 return NotFound();
             }
-
-            ViewBag.WorkingDays = _workingDays;
             return View(salon);
         }
 
@@ -156,7 +134,7 @@ namespace KuaforApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("SalonID,SalonName,Location,OpeningHours,ClosingHours,WorkingDays")] Salon salon)
+        public async Task<IActionResult> Edit(int id, Salon salon)
         {
             if (id != salon.SalonID)
             {
@@ -167,35 +145,7 @@ namespace KuaforApp.Controllers
             {
                 try
                 {
-                    // Validate working days
-                    if (string.IsNullOrEmpty(salon.WorkingDays))
-                    {
-                        ModelState.AddModelError("WorkingDays", "En az bir çalışma günü seçmelisiniz.");
-                        ViewBag.WorkingDays = _workingDays;
-                        return View(salon);
-                    }
-
-                    // Validate opening and closing hours
-                    if (salon.OpeningHours >= salon.ClosingHours)
-                    {
-                        ModelState.AddModelError("ClosingHours", "Kapanış saati açılış saatinden sonra olmalıdır.");
-                        ViewBag.WorkingDays = _workingDays;
-                        return View(salon);
-                    }
-
-                    var existingSalon = await _context.Salons.FindAsync(id);
-                    if (existingSalon == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Update only the modifiable properties
-                    existingSalon.SalonName = salon.SalonName;
-                    existingSalon.Location = salon.Location;
-                    existingSalon.OpeningHours = salon.OpeningHours;
-                    existingSalon.ClosingHours = salon.ClosingHours;
-                    existingSalon.WorkingDays = salon.WorkingDays;
-
+                    _context.Update(salon);
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Salon başarıyla güncellendi.";
                     return RedirectToAction(nameof(Index));
@@ -208,16 +158,10 @@ namespace KuaforApp.Controllers
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Salon güncellenirken bir hata oluştu. Lütfen tekrar deneyin.");
                     }
                 }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Salon güncellenirken bir hata oluştu: " + ex.Message);
-                }
             }
-
-            ViewBag.WorkingDays = _workingDays;
             return View(salon);
         }
 
@@ -235,9 +179,7 @@ namespace KuaforApp.Controllers
             }
 
             var salon = await _context.Salons
-                .Include(s => s.Services)
                 .FirstOrDefaultAsync(m => m.SalonID == id);
-
             if (salon == null)
             {
                 return NotFound();
@@ -257,26 +199,15 @@ namespace KuaforApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var salon = await _context.Salons
-                .Include(s => s.Services)
-                .FirstOrDefaultAsync(m => m.SalonID == id);
-
-            if (salon == null)
-            {
-                return NotFound();
-            }
-
             try
             {
-                if (salon.Services?.Any() == true)
+                var salon = await _context.Salons.FindAsync(id);
+                if (salon != null)
                 {
-                    ModelState.AddModelError("", "Bu salon hizmetlere sahip olduğu için silinemez. Önce hizmetleri silmelisiniz.");
-                    return View(salon);
+                    _context.Salons.Remove(salon);
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Salon başarıyla silindi.";
                 }
-
-                _context.Salons.Remove(salon);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Salon başarıyla silindi.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

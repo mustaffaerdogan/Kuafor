@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KuaforApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241228120352_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241228190308_AddAIRecommendationsV2")]
+    partial class AddAIRecommendationsV2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,37 @@ namespace KuaforApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("KuaforApp.Models.AIRecommendation", b =>
+                {
+                    b.Property<int>("RecommendationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RecommendationID"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("RecommendedStyles")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("RecommendationID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("AIRecommendations");
+                });
 
             modelBuilder.Entity("KuaforApp.Models.ApplicationUser", b =>
                 {
@@ -106,6 +137,53 @@ namespace KuaforApp.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("KuaforApp.Models.Appointment", b =>
+                {
+                    b.Property<int>("AppointmentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppointmentID"));
+
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SalonID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ServiceID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TimeSlot")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("AppointmentID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.HasIndex("SalonID");
+
+                    b.HasIndex("ServiceID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Appointments");
+                });
+
             modelBuilder.Entity("KuaforApp.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeID")
@@ -182,6 +260,10 @@ namespace KuaforApp.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -372,6 +454,52 @@ namespace KuaforApp.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("KuaforApp.Models.AIRecommendation", b =>
+                {
+                    b.HasOne("KuaforApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KuaforApp.Models.Appointment", b =>
+                {
+                    b.HasOne("KuaforApp.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KuaforApp.Models.Salon", "Salon")
+                        .WithMany()
+                        .HasForeignKey("SalonID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KuaforApp.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KuaforApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Salon");
+
+                    b.Navigation("Service");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("KuaforApp.Models.Employee", b =>

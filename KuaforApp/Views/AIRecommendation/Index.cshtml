@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Saç Modeli Önerileri";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Fotoğraf Yükle</h5>
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="photo">Fotoğrafınızı Seçin:</label>
+                            <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Öneri Al</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Önerilen Saç Modelleri</h5>
+                    <div id="recommendations" class="list-group">
+                        <!-- Öneriler burada görüntülenecek -->
+                    </div>
+                    <div id="loading" class="text-center d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Yükleniyor...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#uploadForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData();
+                var fileInput = $('#photo')[0];
+                formData.append('photo', fileInput.files[0]);
+                
+                $('#loading').removeClass('d-none');
+                $('#recommendations').empty();
+                
+                $.ajax({
+                    url: '/api/AIRecommendation/recommendation',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#loading').addClass('d-none');
+                        var recommendations = JSON.parse(response).recommendations;
+                        
+                        recommendations.forEach(function(recommendation) {
+                            $('#recommendations').append(
+                                `<a href="#" class="list-group-item list-group-item-action">
+                                    ${recommendation}
+                                </a>`
+                            );
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        $('#loading').addClass('d-none');
+                        alert('Bir hata oluştu: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+} 

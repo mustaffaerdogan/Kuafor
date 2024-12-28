@@ -23,6 +23,21 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+// Add HttpClient factory
+builder.Services.AddHttpClient();
+
+// Configure CORS for AI service
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AIServicePolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5000")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +51,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Use CORS before authentication and authorization
+app.UseCors("AIServicePolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

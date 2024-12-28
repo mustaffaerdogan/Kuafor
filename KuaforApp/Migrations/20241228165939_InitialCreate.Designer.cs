@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KuaforApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241228155731_Randevularım")]
-    partial class Randevularım
+    [Migration("20241228165939_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

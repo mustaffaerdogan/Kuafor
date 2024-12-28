@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "b2LtosOPXYclXpLfeCcdBJGCoZpujVOc7142GmGJPHA=",
+  "Hash": "XVYY7cfsAHWk7DH4c8t5GBOSa5JoCMOsjIbIlLUmh3o=",
   "Source": "KuaforApp",
   "BasePath": "_content/KuaforApp",
   "Mode": "Default",
@@ -2577,6 +2577,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png",
+      "SourceId": "KuaforApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\",
+      "BasePath": "_content/KuaforApp",
+      "RelativePath": "uploads/60704006-b5b6-4642-89b5-6455a5947243#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1pnn7ef72h",
+      "Integrity": "tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png"
     }
   ],
   "Endpoints": [
@@ -5069,7 +5090,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 16:09:34 GMT"
+          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5106,7 +5127,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 16:09:34 GMT"
+          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5151,7 +5172,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 16:09:34 GMT"
+          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5196,7 +5217,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 16:09:34 GMT"
+          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9881,6 +9902,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/60704006-b5b6-4642-89b5-6455a5947243.1pnn7ef72h.png",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "47705"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:05:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1pnn7ef72h"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/60704006-b5b6-4642-89b5-6455a5947243.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/60704006-b5b6-4642-89b5-6455a5947243.png",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "47705"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:05:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs="
         }
       ]
     }

@@ -22,6 +22,37 @@ namespace KuaforApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("KuaforApp.Models.AIRecommendation", b =>
+                {
+                    b.Property<int>("RecommendationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RecommendationID"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("RecommendedStyles")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("RecommendationID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("AIRecommendations");
+                });
+
             modelBuilder.Entity("KuaforApp.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -420,6 +451,17 @@ namespace KuaforApp.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("KuaforApp.Models.AIRecommendation", b =>
+                {
+                    b.HasOne("KuaforApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("KuaforApp.Models.Appointment", b =>

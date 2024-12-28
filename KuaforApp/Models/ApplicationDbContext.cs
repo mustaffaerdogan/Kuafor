@@ -16,6 +16,7 @@ namespace KuaforApp.Models
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeService> EmployeeServices { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AIRecommendation> AIRecommendations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

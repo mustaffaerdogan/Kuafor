@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png",
+      "PackagePath": "staticwebassets\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.KuaforApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

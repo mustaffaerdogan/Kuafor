@@ -29,6 +29,9 @@ namespace KuaforApp.Controllers
             {
                 TotalSalons = await _context.Salons.CountAsync(),
                 TotalServices = await _context.Services.CountAsync(),
+                PendingAppointments = await _context.Appointments
+                    .Where(a => a.Status == AppointmentStatus.Pending)
+                    .CountAsync(),
                 RecentSalons = await _context.Salons
                     .OrderByDescending(s => s.CreatedAt)
                     .Take(5)

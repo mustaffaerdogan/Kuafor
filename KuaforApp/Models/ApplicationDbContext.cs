@@ -15,6 +15,7 @@ namespace KuaforApp.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeService> EmployeeServices { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,7 +44,32 @@ namespace KuaforApp.Models
                 .HasOne(es => es.Service)
                 .WithMany()
                 .HasForeignKey(es => es.ServiceID)
-                .OnDelete(DeleteBehavior.NoAction); // Using NoAction to avoid circular cascade delete
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Configure Appointment relationships
+            builder.Entity<Appointment>()
+                .HasOne(a => a.User)
+                .WithMany()
+                .HasForeignKey(a => a.UserID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Salon)
+                .WithMany()
+                .HasForeignKey(a => a.SalonID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Service)
+                .WithMany()
+                .HasForeignKey(a => a.ServiceID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Employee)
+                .WithMany()
+                .HasForeignKey(a => a.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configure TimeSpan properties with value converter
             var timeSpanConverter = new ValueConverter<TimeSpan, TimeSpan>(

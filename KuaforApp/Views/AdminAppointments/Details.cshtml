@@ -1,0 +1,98 @@
+@model KuaforApp.ViewModels.AppointmentListViewModel
+
+@{
+    ViewData["Title"] = "Randevu Detayları";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">@ViewData["Title"]</h1>
+            <p class="lead">Randevu bilgilerini görüntüleyin.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Randevu Bilgileri</h5>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.SalonName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.SalonName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ServiceName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ServiceName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.EmployeeName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmployeeName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AppointmentDate)</dt>
+                        <dd class="col-sm-8">@Model.AppointmentDate.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.TimeSlot)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.TimeSlot)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Status)</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge rounded-pill bg-@(Model.Status switch {
+                                AppointmentStatus.Pending => "warning",
+                                AppointmentStatus.Approved => "success",
+                                AppointmentStatus.Rejected => "danger",
+                                _ => "secondary"
+                            })">
+                                @Model.StatusText
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
+                        <dd class="col-sm-8">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+                    </dl>
+
+                    @if (Model.Status == AppointmentStatus.Pending)
+                    {
+                        <div class="mt-4">
+                            <form asp-action="Approve" asp-route-id="@Model.AppointmentID" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Bu randevuyu onaylamak istediğinize emin misiniz?')">
+                                    <i class="bi bi-check-circle"></i> Onayla
+                                </button>
+                            </form>
+                            <form asp-action="Reject" asp-route-id="@Model.AppointmentID" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger ms-2" onclick="return confirm('Bu randevuyu reddetmek istediğinize emin misiniz?')">
+                                    <i class="bi bi-x-circle"></i> Reddet
+                                </button>
+                            </form>
+                        </div>
+                    }
+
+                    <div class="mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Listeye Dön
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Bilgilendirme</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            Randevu durumunu değiştirdikten sonra müşteriye otomatik bilgilendirme yapılacaktır.
+                        </li>
+                        <li>
+                            <i class="bi bi-exclamation-triangle text-warning"></i>
+                            Randevu durumu değiştirildikten sonra geri alınamaz.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

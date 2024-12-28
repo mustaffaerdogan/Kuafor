@@ -1,104 +1,134 @@
 @model KuaforApp.ViewModels.AdminDashboardViewModel
 
 @{
-    ViewData["Title"] = "Admin Paneli";
+    ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="container-fluid py-4">
-    <h1 class="mb-4">Admin Paneli</h1>
-
-    <!-- İstatistik Kartları -->
+<div class="container">
     <div class="row mb-4">
-        <div class="col-md-6">
-            <div class="card bg-primary text-white">
+        <div class="col">
+            <h1 class="display-4">Admin Dashboard</h1>
+            <p class="lead">Kuaför/Berber salonunuzu buradan yönetin.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Toplam Salon</h5>
-                    <p class="card-text display-4">@Model.TotalSalons</p>
-                    <a asp-controller="Salons" asp-action="Index" class="btn btn-light">Salonları Yönet</a>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="card-title mb-0">Salonlar</h5>
+                            <small class="text-muted">Toplam salon sayısı</small>
+                        </div>
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-shop text-white" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h2 class="mb-0">@Model.TotalSalons</h2>
+                    <a asp-controller="Salons" asp-action="Index" class="btn btn-primary btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Salonları Yönet
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card bg-success text-white">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Toplam Hizmet</h5>
-                    <p class="card-text display-4">@Model.TotalServices</p>
-                    <a asp-controller="Services" asp-action="Index" class="btn btn-light">Hizmetleri Yönet</a>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="card-title mb-0">Hizmetler</h5>
+                            <small class="text-muted">Toplam hizmet sayısı</small>
+                        </div>
+                        <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-scissors text-white" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h2 class="mb-0">@Model.TotalServices</h2>
+                    <a asp-controller="Services" asp-action="Index" class="btn btn-success btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Hizmetleri Yönet
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="card-title mb-0">Randevular</h5>
+                            <small class="text-muted">Bekleyen randevular</small>
+                        </div>
+                        <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-calendar-check text-white" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h2 class="mb-0">@Model.PendingAppointments</h2>
+                    <a asp-controller="AdminAppointments" asp-action="Index" class="btn btn-warning btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Randevuları Yönet
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Son Eklenen Salonlar -->
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Son Eklenen Salonlar</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        @foreach (var salon in Model.RecentSalons)
-                        {
-                            <div class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1">@salon.SalonName</h6>
-                                    <small>@salon.CreatedAt.ToString("dd.MM.yyyy")</small>
-                                </div>
-                                <p class="mb-1">@salon.Location</p>
-                                <small>Çalışma Saatleri: @salon.OpeningHours.ToString(@"hh\:mm") - @salon.ClosingHours.ToString(@"hh\:mm")</small>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Son Eklenen Hizmetler -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Son Eklenen Hizmetler</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        @foreach (var service in Model.RecentServices)
-                        {
-                            <div class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1">@service.ServiceName</h6>
-                                    <small>@service.CreatedAt.ToString("dd.MM.yyyy")</small>
-                                </div>
-                                <p class="mb-1">@service.Salon?.SalonName</p>
-                                <small>Fiyat: @service.Price.ToString("C2") | Süre: @service.Duration dk</small>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hızlı İşlemler -->
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Hızlı İşlemler</h5>
-                </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a asp-controller="Salons" asp-action="Create" class="btn btn-primary btn-lg w-100 mb-3">
-                                <i class="bi bi-plus-circle"></i> Yeni Salon Ekle
-                            </a>
+                    <h5 class="card-title">Son Eklenen Salonlar</h5>
+                    @if (!Model.RecentSalons.Any())
+                    {
+                        <p class="text-muted mb-0">Henüz salon eklenmemiş.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var salon in Model.RecentSalons)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-0">@salon.SalonName</h6>
+                                            <small class="text-muted">@salon.Location</small>
+                                        </div>
+                                        <small class="text-muted">@salon.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</small>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        <div class="col-md-6">
-                            <a asp-controller="Services" asp-action="Create" class="btn btn-success btn-lg w-100 mb-3">
-                                <i class="bi bi-plus-circle"></i> Yeni Hizmet Ekle
-                            </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Son Eklenen Hizmetler</h5>
+                    @if (!Model.RecentServices.Any())
+                    {
+                        <p class="text-muted mb-0">Henüz hizmet eklenmemiş.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var service in Model.RecentServices)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-0">@service.ServiceName</h6>
+                                            <small class="text-muted">@service.Salon.SalonName</small>
+                                        </div>
+                                        <small class="text-muted">@service.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</small>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

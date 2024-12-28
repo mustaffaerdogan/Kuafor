@@ -1,0 +1,202 @@
+@model KuaforApp.ViewModels.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Yeni Randevu";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">@ViewData["Title"]</h1>
+            <p class="lead">Yeni randevu oluşturmak için aşağıdaki formu doldurun.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" id="appointmentForm">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Salon ve Hizmet Seçimi</h5>
+
+                        <div class="mb-3">
+                            <label asp-for="SalonID" class="form-label"></label>
+                            <select asp-for="SalonID" asp-items="Model.Salons" class="form-select">
+                                <option value="">Salon Seç</option>
+                            </select>
+                            <span asp-validation-for="SalonID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ServiceID" class="form-label"></label>
+                            <select asp-for="ServiceID" asp-items="Model.Services" class="form-select" disabled>
+                                <option value="">Önce salon seçin</option>
+                            </select>
+                            <span asp-validation-for="ServiceID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EmployeeID" class="form-label"></label>
+                            <select asp-for="EmployeeID" asp-items="Model.Employees" class="form-select" disabled>
+                                <option value="">Önce hizmet seçin</option>
+                            </select>
+                            <span asp-validation-for="EmployeeID" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Tarih ve Saat Seçimi</h5>
+
+                        <div class="mb-3">
+                            <label asp-for="AppointmentDate" class="form-label"></label>
+                            <input asp-for="AppointmentDate" class="form-control" type="date" disabled />
+                            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="TimeSlot" class="form-label"></label>
+                            <select asp-for="TimeSlot" class="form-select" disabled>
+                                <option value="">Önce tarih seçin</option>
+                            </select>
+                            <span asp-validation-for="TimeSlot" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Geri Dön
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-calendar-check"></i> Randevu Oluştur
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Bilgilendirme</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            Randevunuz onay bekleyecektir.
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-clock text-primary"></i>
+                            Randevu saatleri 30 dakikalık dilimlere ayrılmıştır.
+                        </li>
+                        <li>
+                            <i class="bi bi-calendar-x text-primary"></i>
+                            İptal etmek için müşteri hizmetlerini arayın.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            // Salon selection change
+            $('#SalonID').change(function () {
+                var salonId = $(this).val();
+                var serviceSelect = $('#ServiceID');
+                var employeeSelect = $('#EmployeeID');
+                var dateInput = $('#AppointmentDate');
+                var timeSelect = $('#TimeSlot');
+
+                // Reset dependent fields
+                serviceSelect.prop('disabled', true).empty().append('<option value="">Önce salon seçin</option>');
+                employeeSelect.prop('disabled', true).empty().append('<option value="">Önce hizmet seçin</option>');
+                dateInput.prop('disabled', true).val('');
+                timeSelect.prop('disabled', true).empty().append('<option value="">Önce tarih seçin</option>');
+
+                if (salonId) {
+                    // Enable and load services
+                    serviceSelect.prop('disabled', false);
+                    $.get('/Appointments/GetServicesBySalon', { salonId: salonId }, function (data) {
+                        serviceSelect.empty().append('<option value="">Hizmet Seç</option>');
+                        $.each(data, function (i, item) {
+                            serviceSelect.append($('<option>', { value: item.value, text: item.text }));
+                        });
+                    });
+                }
+            });
+
+            // Service selection change
+            $('#ServiceID').change(function () {
+                var serviceId = $(this).val();
+                var employeeSelect = $('#EmployeeID');
+                var dateInput = $('#AppointmentDate');
+                var timeSelect = $('#TimeSlot');
+
+                // Reset dependent fields
+                employeeSelect.prop('disabled', true).empty().append('<option value="">Önce hizmet seçin</option>');
+                dateInput.prop('disabled', true).val('');
+                timeSelect.prop('disabled', true).empty().append('<option value="">Önce tarih seçin</option>');
+
+                if (serviceId) {
+                    // Enable and load employees
+                    employeeSelect.prop('disabled', false);
+                    $.get('/Appointments/GetEmployeesByService', { serviceId: serviceId }, function (data) {
+                        employeeSelect.empty().append('<option value="">Çalışan Seç</option>');
+                        $.each(data, function (i, item) {
+                            employeeSelect.append($('<option>', { value: item.value, text: item.text }));
+                        });
+                    });
+                }
+            });
+
+            // Employee selection change
+            $('#EmployeeID').change(function () {
+                var employeeId = $(this).val();
+                var dateInput = $('#AppointmentDate');
+                var timeSelect = $('#TimeSlot');
+
+                // Reset dependent fields
+                dateInput.prop('disabled', true).val('');
+                timeSelect.prop('disabled', true).empty().append('<option value="">Önce tarih seçin</option>');
+
+                if (employeeId) {
+                    // Enable date selection
+                    dateInput.prop('disabled', false);
+                    
+                    // Set minimum date to today
+                    var today = new Date().toISOString().split('T')[0];
+                    dateInput.attr('min', today);
+                }
+            });
+
+            // Date selection change
+            $('#AppointmentDate').change(function () {
+                var date = $(this).val();
+                var employeeId = $('#EmployeeID').val();
+                var timeSelect = $('#TimeSlot');
+
+                // Reset time selection
+                timeSelect.prop('disabled', true).empty().append('<option value="">Önce tarih seçin</option>');
+
+                if (date && employeeId) {
+                    // Enable and load time slots
+                    timeSelect.prop('disabled', false);
+                    $.get('/Appointments/GetAvailableTimeSlots', { employeeId: employeeId, date: date }, function (data) {
+                        timeSelect.empty().append('<option value="">Saat Seç</option>');
+                        $.each(data, function (i, item) {
+                            timeSelect.append($('<option>', { value: item, text: item }));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+} 

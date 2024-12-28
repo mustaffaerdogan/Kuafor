@@ -249,6 +249,22 @@
       "PackagePath": "staticwebassets\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png"
     },
     {
+      "Id": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg",
+      "PackagePath": "staticwebassets\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg",
+      "PackagePath": "staticwebassets\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg",
+      "PackagePath": "staticwebassets\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg",
+      "PackagePath": "staticwebassets\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.KuaforApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

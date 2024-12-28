@@ -74,6 +74,16 @@ namespace KuaforApp.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            ViewBag.WorkingDays = new List<string>
+            {
+                "Pazartesi",
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi",
+                "Pazar"
+            };
             return View();
         }
 

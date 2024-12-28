@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XVYY7cfsAHWk7DH4c8t5GBOSa5JoCMOsjIbIlLUmh3o=",
+  "Hash": "Mh/RDMKcuxrcCMX9n5Uj2kU9bH3lPfFDgmswucvID2M=",
   "Source": "KuaforApp",
   "BasePath": "_content/KuaforApp",
   "Mode": "Default",
@@ -2598,6 +2598,90 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\60704006-b5b6-4642-89b5-6455a5947243.png"
+    },
+    {
+      "Identity": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg",
+      "SourceId": "KuaforApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\",
+      "BasePath": "_content/KuaforApp",
+      "RelativePath": "uploads/6e18db3a-57d8-42ec-b26d-74aac63dd044#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "a0enor49v1",
+      "Integrity": "VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg",
+      "SourceId": "KuaforApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\",
+      "BasePath": "_content/KuaforApp",
+      "RelativePath": "uploads/86ff3257-be0a-4a8e-8ec6-0a63a72a31fd#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "a0enor49v1",
+      "Integrity": "VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg",
+      "SourceId": "KuaforApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\",
+      "BasePath": "_content/KuaforApp",
+      "RelativePath": "uploads/b5da24f5-cc22-410f-93cc-7f6fd49d3cc7#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "h64bfa6kw5",
+      "Integrity": "6SDuPNr+NmhducHsYVnCTIQG+0V3XOr/UOHtnm+y3CI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg",
+      "SourceId": "KuaforApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\",
+      "BasePath": "_content/KuaforApp",
+      "RelativePath": "uploads/e19d6ca1-e497-436c-91b1-4154677ab6a7#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "a0enor49v1",
+      "Integrity": "VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg"
     }
   ],
   "Endpoints": [
@@ -5090,7 +5174,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
+          "Value": "Sat, 28 Dec 2024 19:55:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5127,7 +5211,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
+          "Value": "Sat, 28 Dec 2024 19:55:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5172,7 +5256,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
+          "Value": "Sat, 28 Dec 2024 19:55:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5217,7 +5301,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 28 Dec 2024 19:05:20 GMT"
+          "Value": "Sat, 28 Dec 2024 19:55:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9984,6 +10068,334 @@
         {
           "Name": "integrity",
           "Value": "sha256-tebkB7TEyOF1elkw31CRgNaY25EovuFEVL33C5oDZTs="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6e18db3a-57d8-42ec-b26d-74aac63dd044.a0enor49v1.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:55:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a0enor49v1"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\6e18db3a-57d8-42ec-b26d-74aac63dd044.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:55:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.a0enor49v1.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:55:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a0enor49v1"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\86ff3257-be0a-4a8e-8ec6-0a63a72a31fd.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:55:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.h64bfa6kw5.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17704"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6SDuPNr+NmhducHsYVnCTIQG+0V3XOr/UOHtnm+y3CI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:58:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h64bfa6kw5"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6SDuPNr+NmhducHsYVnCTIQG+0V3XOr/UOHtnm+y3CI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\b5da24f5-cc22-410f-93cc-7f6fd49d3cc7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17704"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6SDuPNr+NmhducHsYVnCTIQG+0V3XOr/UOHtnm+y3CI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:58:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6SDuPNr+NmhducHsYVnCTIQG+0V3XOr/UOHtnm+y3CI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/e19d6ca1-e497-436c-91b1-4154677ab6a7.a0enor49v1.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:27:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a0enor49v1"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg",
+      "AssetFile": "C:\\Users\\Mustafa\\source\\repos\\KuaforApp\\KuaforApp\\wwwroot\\uploads\\e19d6ca1-e497-436c-91b1-4154677ab6a7.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 28 Dec 2024 19:27:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VnWZNkgdT3j9agtXVGSgs/eA/2OiNJa/vqBx4AHRQP8="
         }
       ]
     }

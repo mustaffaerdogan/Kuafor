@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KuaforApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241227190412_AddEmployeeAndEmployeeServiceTables")]
-    partial class AddEmployeeAndEmployeeServiceTables
+    [Migration("20241228120352_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

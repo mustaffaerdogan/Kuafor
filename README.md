@@ -402,7 +402,7 @@ Sakarya Üniversitesi 3. Sınıf Web Programlama dönem projesi.
 
 ## 📞 İletişim
 
-- **E-posta**: [mustaffaerdogan@example.com]
+- **E-posta**: [mustafaerdoganu@gmail.com]
 - **GitHub**: [https://github.com/mustaffaerdogan/KuaforApp]
 
 ---

@@ -402,7 +402,7 @@ Sakarya University 3rd Year Web Programming semester project.
 
 ## 📞 Contact
 
-- **Email**: [your-email@example.com]
+- **E-posta**: [mustafaerdoganu@gmail.com]
 - **GitHub**: [https://github.com/mustaffaerdogan/KuaforApp]
 
 ---
